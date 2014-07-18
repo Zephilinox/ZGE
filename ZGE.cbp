@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ZGE" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/ZGE" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj/Debug/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="sfml-audio-d-s" />
+					<Add library="sfml-graphics-d-s" />
+					<Add library="sfml-window-d-s" />
+					<Add library="sfml-system-d-s" />
+					<Add library="sfml-network-d-s" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/ZGE" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj/Release/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-Wall" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="sfml-audio-s" />
+					<Add library="sfml-graphics-s" />
+					<Add library="sfml-window-s" />
+					<Add library="sfml-system-s" />
+					<Add library="sfml-network-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-DSFML_STATIC" />
+			<Add directory="Z:/Programming/C++/SFML-2.1/include" />
+			<Add directory="src" />
+			<Add directory="include" />
+		</Compiler>
+		<Linker>
+			<Add option="-static" />
+			<Add option="-static-libstdc++" />
+			<Add option="-satic-libgcc" />
+			<Add directory="Z:/Programming/C++/SFML-2.1/lib" />
+		</Linker>
+		<Unit filename="include/ZGE/ResourceManagement/Resource.hpp" />
+		<Unit filename="include/ZGE/ResourceManagement/ResourceCache.hpp" />
+		<Unit filename="include/ZGE/ResourceManagement/ResourceManager.hpp" />
+		<Unit filename="include/ZGE/State/BaseState.hpp" />
+		<Unit filename="include/ZGE/State/StateCollection.hpp" />
+		<Unit filename="include/ZGE/State/StateHandler.hpp" />
+		<Unit filename="include/ZGE/Utility.hpp" />
+		<Unit filename="include/ZGE/Vector.hpp" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="src/ZGE/ResourceManagement/Resource.cpp" />
+		<Unit filename="src/ZGE/ResourceManagement/Resource.inl" />
+		<Unit filename="src/ZGE/ResourceManagement/ResourceCache.inl" />
+		<Unit filename="src/ZGE/ResourceManagement/ResourceManager.inl" />
+		<Unit filename="src/ZGE/State/BaseState.cpp" />
+		<Unit filename="src/ZGE/State/StateCollection.cpp" />
+		<Unit filename="src/ZGE/State/StateCollection.inl" />
+		<Unit filename="src/ZGE/State/StateHandler.cpp" />
+		<Unit filename="src/ZGE/Utility.cpp" />
+		<Unit filename="src/ZGE/Vector.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
