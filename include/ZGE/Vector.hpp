@@ -49,7 +49,7 @@ public:
     double x;
     double y;
 
-    double dot(Vector& vec);
+    double dot(Vector vec);
     double length();
     double lengthSquared();
     void normalize();

@@ -20,12 +20,12 @@ double Vector::degToRad(double argDeg)
 
 Vector Vector::degToVector(double deg)
 {
-    return zge::Vector(std::sin(degToRad(deg)), -1 * std::cos(degToRad(deg)));
+    return radToVector(degToRad(deg));
 }
 
 Vector Vector::radToVector(double rad)
 {
-    return zge::Vector(std::sin(rad), -1 * std::cos(rad));
+    return zge::Vector(std::sin(rad), -std::cos(rad));
 }
 
 Vector& Vector::operator=(const Vector& argVec)
@@ -131,12 +131,9 @@ Vector& Vector::operator/=(double argScalar)
     return *this;
 }
 
-double Vector::dot(Vector& argVec)
+double Vector::dot(Vector argVec)
 {
-    zge::Vector me = this->normalized();
-    zge::Vector norm = argVec.normalized();
-
-    return (me.x * norm.x) + (me.y * norm.y);
+    return (x * argVec.x) + (y * argVec.y);
 }
 
 double Vector::length()
