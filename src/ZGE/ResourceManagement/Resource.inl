@@ -21,7 +21,7 @@ Resource<ResourceType>::Resource(std::string n)
 template <class ResourceType>
 Resource<ResourceType>::~Resource()
 {
-    //std::cout << "[Resource] Destructor | " << m_name << "\n";
+    std::cout << "[Resource] Destructor | " << m_name << "\n";
     ResourceManager<ResourceType>::getInstance().destroy(m_name);
 }
 
@@ -59,12 +59,14 @@ ResourceType& Resource<ResourceType>::get()
 template <class ResourceType>
 void Resource<ResourceType>::copyResource(const Resource<ResourceType>& res)
 {
-    //std::cout << "[Resource] Copied\n";
-    //std::cout << "\tthis = " << m_name << "\n\tother = " << res.m_name << "\n";
+    std::cout << "[Resource] Copied\n";
+    std::cout << "\tthis = " << m_name << "\n\tother = " << res.m_name << "\n";
+
+    if (res.m_name.empty()) return;
 
     if (!m_name.empty())
     {
-        ResourceManager<ResourceType>::getInstance().destroy(m_name); //Destroy whatever resource res was holding before
+        ResourceManager<ResourceType>::getInstance().destroy(m_name); //Destroy whatever resource this was holding before
     }
 
     m_name = res.m_name;

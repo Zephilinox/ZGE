@@ -58,6 +58,8 @@ bool ResourceManager<ResourceType>::create(std::string name)
 template <class ResourceType>
 void ResourceManager<ResourceType>::destroy(std::string name)
 {
+    if (name.empty()) return;
+
     std::transform(name.begin(), name.end(), name.begin(), ::tolower);
 
     auto it = m_resources.find(name);
