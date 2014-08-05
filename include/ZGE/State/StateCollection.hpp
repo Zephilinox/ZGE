@@ -32,7 +32,12 @@ private:
     std::stack<std::shared_ptr<BaseState>> m_states;
 };
 
-#include "ZGE/State/StateCollection.inl"
+//Template functions
+template <class T>
+void StateCollection::push(sf::RenderWindow& window)
+{
+    m_states.push(std::make_shared<T>(T(window, *this)));
+}
 
 } //ZGE
 
