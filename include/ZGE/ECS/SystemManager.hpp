@@ -10,11 +10,15 @@
 
 //SELF
 #include "ZGE/ECS/BaseSystem.hpp"
+#include "ZGE/State/BaseState.hpp"
+
+namespace zge
+{
 
 class SystemManager
 {
 public:
-    SystemManager(std::shared_ptr<EntityManager> entMan);
+    SystemManager(std::shared_ptr<BaseState> stateOwner);
     void handleEvent(const sf::Event& event);
     void update(float dt);
     void draw(sf::RenderTarget& target, sf::RenderStates states);
@@ -22,13 +26,13 @@ public:
 
 private:
     std::unordered_map<std::string, std::shared_ptr<BaseSystem>> m_systems;
-    std::shared_ptr<EntityManager> m_entMan;
+    std::shared_ptr<BaseState> m_stateOwner;
 };
 
 template <class T>
 void SystemManager::addSystem()
 {
-    std::shared_ptr<T> system(new T(m_entMan));
+    std::shared_ptr<T> system(new T(m_stateOwner));
 
     if (!m_systems.count(system->ID))
     {
@@ -39,4 +43,7 @@ void SystemManager::addSystem()
         assert(!"Error: That system already exists\n");
     }
 }
+
+} //ZGE
+
 #endif //SYSTEMMANAGER_HPP

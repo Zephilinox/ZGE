@@ -1,7 +1,9 @@
 #include "ZGE/ECS/SystemManager.hpp"
 
-SystemManager::SystemManager(std::shared_ptr<EntityManager> entMan)
-    : m_entMan(entMan)
+using namespace zge;
+
+SystemManager::SystemManager(std::shared_ptr<BaseState> stateOwner)
+    : m_stateOwner(stateOwner)
 {
 }
 

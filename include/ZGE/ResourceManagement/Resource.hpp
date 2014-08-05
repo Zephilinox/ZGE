@@ -33,6 +33,8 @@ private:
 
     std::string m_name;
 };
+
+//Templated functions
 template <class ResourceType>
 Resource<ResourceType>::Resource(std::string n)
     : m_name(n)
@@ -46,7 +48,6 @@ Resource<ResourceType>::Resource(std::string n)
     }
 }
 
-//Templated functions
 template <class ResourceType>
 Resource<ResourceType>::~Resource()
 {

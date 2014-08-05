@@ -9,11 +9,15 @@
 
 //SELF
 #include "ZGE/ECS/EntityManager.hpp"
+#include "ZGE/State/BaseState.hpp"
+
+namespace zge
+{
 
 class BaseSystem
 {
 public:
-    BaseSystem(std::string id, std::shared_ptr<EntityManager> entMan);
+    BaseSystem(std::string id, std::shared_ptr<BaseState> stateOwner);
     virtual ~BaseSystem() = default;
 
     virtual void handleEvent(const sf::Event& event){};
@@ -23,7 +27,9 @@ public:
     std::string ID;
 
 protected:
-    std::shared_ptr<EntityManager> m_entMan;
+    std::shared_ptr<BaseState> m_stateOwner;
 };
+
+} //ZGE
 
 #endif //BASESYSTEM_HPP

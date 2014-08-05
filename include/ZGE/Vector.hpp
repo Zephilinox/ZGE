@@ -15,8 +15,6 @@ const double pi = 3.141592653;
 namespace zge
 {
 
-
-
 class Vector
 {
 public:

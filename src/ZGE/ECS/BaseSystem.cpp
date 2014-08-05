@@ -1,8 +1,10 @@
 #include "ZGE/ECS/BaseSystem.hpp"
 
-BaseSystem::BaseSystem(std::string id, std::shared_ptr<EntityManager> entMan)
+using namespace zge;
+
+BaseSystem::BaseSystem(std::string id, std::shared_ptr<BaseState> stateOwner)
     : ID(id)
-    , m_entMan(entMan)
+    , m_stateOwner(stateOwner)
 {
 }
 
