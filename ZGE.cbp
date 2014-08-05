@@ -59,26 +59,36 @@
 			<Add option="-satic-libgcc" />
 			<Add directory="Z:/Programming/C++/SFML-2.1/lib" />
 		</Linker>
+		<Unit filename="include/ZGE/Collider.hpp" />
+		<Unit filename="include/ZGE/ECS/BaseComponent.hpp" />
+		<Unit filename="include/ZGE/ECS/BaseSystem.hpp" />
+		<Unit filename="include/ZGE/ECS/EntityManager.hpp" />
+		<Unit filename="include/ZGE/ECS/SystemManager.hpp" />
+		<Unit filename="include/ZGE/GUI/Button.hpp" />
+		<Unit filename="include/ZGE/GUI/Menu.hpp" />
+		<Unit filename="include/ZGE/KeybindingCache.hpp" />
 		<Unit filename="include/ZGE/ResourceManagement/Resource.hpp" />
 		<Unit filename="include/ZGE/ResourceManagement/ResourceCache.hpp" />
 		<Unit filename="include/ZGE/ResourceManagement/ResourceManager.hpp" />
 		<Unit filename="include/ZGE/State/BaseState.hpp" />
 		<Unit filename="include/ZGE/State/StateCollection.hpp" />
 		<Unit filename="include/ZGE/State/StateHandler.hpp" />
+		<Unit filename="include/ZGE/TextHandler.hpp" />
 		<Unit filename="include/ZGE/Utility.hpp" />
 		<Unit filename="include/ZGE/Vector.hpp" />
-		<Unit filename="main.c">
-			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="src/ZGE/Collider.cpp" />
+		<Unit filename="src/ZGE/ECS/BaseComponent.cpp" />
+		<Unit filename="src/ZGE/ECS/BaseSystem.cpp" />
+		<Unit filename="src/ZGE/ECS/EntityManager.cpp" />
+		<Unit filename="src/ZGE/ECS/SystemManager.cpp" />
+		<Unit filename="src/ZGE/GUI/Button.cpp" />
+		<Unit filename="src/ZGE/GUI/Menu.cpp" />
+		<Unit filename="src/ZGE/KeybindingCache.cpp" />
 		<Unit filename="src/ZGE/ResourceManagement/Resource.cpp" />
-		<Unit filename="src/ZGE/ResourceManagement/Resource.inl" />
-		<Unit filename="src/ZGE/ResourceManagement/ResourceCache.inl" />
-		<Unit filename="src/ZGE/ResourceManagement/ResourceManager.inl" />
 		<Unit filename="src/ZGE/State/BaseState.cpp" />
 		<Unit filename="src/ZGE/State/StateCollection.cpp" />
-		<Unit filename="src/ZGE/State/StateCollection.inl" />
 		<Unit filename="src/ZGE/State/StateHandler.cpp" />
+		<Unit filename="src/ZGE/TextHandler.cpp" />
 		<Unit filename="src/ZGE/Utility.cpp" />
 		<Unit filename="src/ZGE/Vector.cpp" />
 		<Extensions>

@@ -8,6 +8,9 @@
 
 //SELF
 
+namespace zge
+{
+
 class BaseComponent
 {
 public:
@@ -16,5 +19,8 @@ public:
 
     std::string ID;
 };
+
+} //ZGE
+
 
 #endif //BASECOMPONENT_HPP

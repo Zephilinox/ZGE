@@ -1,13 +1,10 @@
 #include "ZGE/ECS/EntityManager.hpp"
 
-EntityManager::EntityManager(sf::RenderWindow& window)
-    : m_window(window)
-{
-}
+using namespace zge;
 
-sf::RenderWindow& EntityManager::getRenderWindow()
+EntityManager::EntityManager(std::shared_ptr<BaseState> stateOwner)
+    : m_stateOwner(stateOwner)
 {
-    return m_window;
 }
 
 EntityID EntityManager::createEntity()

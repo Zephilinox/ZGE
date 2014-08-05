@@ -13,6 +13,10 @@
 
 //SELF
 #include "ZGE/ECS/BaseComponent.hpp"
+#include "ZGE/State/BaseState.hpp"
+
+namespace zge
+{
 
 typedef unsigned                                                            EntityID;
 typedef std::unordered_map<std::string, std::shared_ptr<BaseComponent>>     EntityComponents;
@@ -21,9 +25,7 @@ typedef std::unordered_map<EntityID, EntityComponents>                      Enti
 class EntityManager
 {
 public:
-    EntityManager(sf::RenderWindow& window);
-
-    sf::RenderWindow& getRenderWindow();
+    EntityManager(std::shared_ptr<BaseState> stateOwner);
 
     EntityID createEntity();
     bool entityExists(EntityID entID);
@@ -42,8 +44,8 @@ public:
 private:
     template <class T> bool hasComponents(EntityID entID);
 
+    std::shared_ptr<BaseState> m_stateOwner;
     EntityMap m_entities;
-    sf::RenderWindow& m_window;
 };
 
 template <class T>
@@ -187,5 +189,7 @@ void EntityManager::removeComponent(EntityID entID)
         assert(!"removeComponent: The Entity does not have that Component");
     }
 }
+
+} //ZGE
 
 #endif //ENTITYMANAGER_HPP
