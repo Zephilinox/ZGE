@@ -1,0 +1,191 @@
+#ifndef ENTITYMANAGER_HPP
+#define ENTITYMANAGER_HPP
+
+//STD
+#include <memory>
+#include <unordered_map>
+#include <cassert>
+#include <iostream>
+#include <vector>
+
+//3RD
+#include <SFML/Graphics.hpp>
+
+//SELF
+#include "ZGE/ECS/BaseComponent.hpp"
+
+typedef unsigned                                                            EntityID;
+typedef std::unordered_map<std::string, std::shared_ptr<BaseComponent>>     EntityComponents;
+typedef std::unordered_map<EntityID, EntityComponents>                      EntityMap;
+
+class EntityManager
+{
+public:
+    EntityManager(sf::RenderWindow& window);
+
+    sf::RenderWindow& getRenderWindow();
+
+    EntityID createEntity();
+    bool entityExists(EntityID entID);
+    void removeEntity(EntityID entID);
+
+    template <class T> std::vector<unsigned> getEntitiesByComponent();
+    template <class T, class... Other> std::vector<unsigned> getEntitiesByComponents();
+
+    template <class T> T& addComponent(EntityID entID);
+    template <class T> bool hasComponent(EntityID entID);
+    template <class T1, class T2, class... Other> bool hasComponents(EntityID entID);
+    template <class T> T& getComponent(EntityID entID);
+    template <class T> std::vector<std::shared_ptr<T>> getAllComponents();
+    template <class T> void removeComponent(EntityID entID);
+
+private:
+    template <class T> bool hasComponents(EntityID entID);
+
+    EntityMap m_entities;
+    sf::RenderWindow& m_window;
+};
+
+template <class T>
+std::vector<unsigned> EntityManager::getEntitiesByComponent()
+{
+    std::vector<unsigned> ents;
+
+    for (auto& ent : m_entities)
+    {
+        if (hasComponent<T>(ent.first))
+        {
+            ents.push_back(ent.first);
+        }
+    }
+
+    return ents;
+}
+
+template <class T, class... Other>
+std::vector<unsigned> EntityManager::getEntitiesByComponents()
+{
+    std::vector<unsigned> ents;
+
+    for (auto& ent : m_entities)
+    {
+        if (hasComponents<T, Other...>(ent.first))
+        {
+            ents.push_back(ent.first);
+        }
+    }
+
+    return ents;
+}
+
+template <class T>
+T& EntityManager::addComponent(EntityID entID)
+{
+    auto component = std::shared_ptr<T>(new T);
+
+    //Check if this component's ID isn't the default for the base component
+    //If it is then either they are adding a useless component, or they forgot to specify a new ID for the component they are trying to add
+    //I'm only doing the check here, rather than in every function, since every component used will eventually need to be added to an entity
+
+    if (component->ID == BaseComponent("Base").ID)
+    {
+        std::cout << "\n" << "addComponent: Attempted to add the BaseComponent" << "\n";
+        assert(!"Perhaps you forgot to assign a new ID in this components initialization list?");
+    }
+
+    if (!hasComponent<T>(entID))
+    {
+        m_entities[entID][component->ID] = component;
+        return getComponent<T>(entID);
+    }
+    else
+    {
+        assert(!"addComponent: That Component already exists");
+    }
+}
+
+template <class T>
+bool EntityManager::hasComponent(EntityID entID)
+{
+    T component;
+
+    if (entityExists(entID))
+    {
+        return m_entities[entID].count(component.ID);
+    }
+    else
+    {
+        assert(!"hasComponent: That Entity ID is invalid");
+        return false;
+    }
+}
+
+template <class T> bool EntityManager::hasComponents(EntityID entID)
+{
+    return hasComponent<T>(entID);
+}
+
+template <class T1, class T2, class... Other>
+bool EntityManager::hasComponents(EntityID entID)
+{
+    if (entityExists(entID))
+    {
+        return (hasComponent<T1>(entID) && hasComponents<T2, Other...>(entID));
+    }
+    else
+    {
+        assert(!"hasComponents: That Entity ID is invalid");
+        return false;
+    }
+}
+
+
+template <class T>
+T& EntityManager::getComponent(EntityID entID)
+{
+    T component;
+
+    if (hasComponent<T>(entID))
+    {
+        return *(std::static_pointer_cast<T>(m_entities[entID][component.ID]));
+    }
+    else
+    {
+        assert(!"getComponent: The Entity does not have that Component");
+    }
+}
+
+template <class T>
+std::vector<std::shared_ptr<T>> EntityManager::getAllComponents()
+{
+    std::vector<std::shared_ptr<T>> components;
+
+    for (auto& ent : m_entities)
+    {
+        if (hasComponent<T>(ent.first))
+        {
+            auto comp = std::static_pointer_cast<T>(m_entities[ent.first][T().ID]);
+
+            components.push_back(comp);
+        }
+    }
+
+    return components;
+}
+
+template <class T>
+void EntityManager::removeComponent(EntityID entID)
+{
+    T component;
+
+    if (hasComponent<T>(entID))
+    {
+        m_entities[entID].erase(component.ID);
+    }
+    else
+    {
+        assert(!"removeComponent: The Entity does not have that Component");
+    }
+}
+
+#endif //ENTITYMANAGER_HPP
