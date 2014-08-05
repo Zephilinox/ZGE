@@ -7,6 +7,7 @@
 #include <cassert>
 #include <iostream>
 #include <vector>
+#include <functional>
 
 //3RD
 #include <SFML/Graphics.hpp>
@@ -38,7 +39,7 @@ public:
     template <class T> bool hasComponent(EntityID entID);
     template <class T1, class T2, class... Other> bool hasComponents(EntityID entID);
     template <class T> T& getComponent(EntityID entID);
-    template <class T> std::vector<std::shared_ptr<T>> getAllComponents();
+    template <class T> std::vector<std::reference_wrapper<T>> getAllComponents();
     template <class T> void removeComponent(EntityID entID);
 
 private:
@@ -158,15 +159,15 @@ T& EntityManager::getComponent(EntityID entID)
 }
 
 template <class T>
-std::vector<std::shared_ptr<T>> EntityManager::getAllComponents()
+std::vector<std::reference_wrapper<T>> EntityManager::getAllComponents()
 {
-    std::vector<std::shared_ptr<T>> components;
+    std::vector<std::reference_wrapper<T>> components;
 
     for (auto& ent : m_entities)
     {
         if (hasComponent<T>(ent.first))
         {
-            auto comp = std::static_pointer_cast<T>(m_entities[ent.first][T().ID]);
+            auto comp = std::ref(std::static_pointer_cast<T>(m_entities[ent.first][T().ID]));
 
             components.push_back(comp);
         }
