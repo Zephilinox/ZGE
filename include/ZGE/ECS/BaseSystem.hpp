@@ -17,7 +17,7 @@ namespace zge
 class BaseSystem
 {
 public:
-    BaseSystem(std::string id, std::shared_ptr<BaseState> stateOwner);
+    BaseSystem(std::string id, std::reference_wrapper<sf::RenderWindow> window, std::reference_wrapper<EntityManager> entMan);
     virtual ~BaseSystem() = default;
 
     virtual void handleEvent(const sf::Event& event){};
@@ -27,7 +27,8 @@ public:
     std::string ID;
 
 protected:
-    std::shared_ptr<BaseState> m_stateOwner;
+    std::reference_wrapper<sf::RenderWindow> m_window;
+    std::reference_wrapper<EntityManager> m_entMan;
 };
 
 } //ZGE

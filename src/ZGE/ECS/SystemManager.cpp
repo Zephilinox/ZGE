@@ -2,8 +2,9 @@
 
 using namespace zge;
 
-SystemManager::SystemManager(std::shared_ptr<BaseState> stateOwner)
-    : m_stateOwner(stateOwner)
+SystemManager::SystemManager(std::reference_wrapper<sf::RenderWindow> window, std::reference_wrapper<EntityManager> entMan)
+    : m_window(window)
+    , m_entMan(entMan)
 {
 }
 

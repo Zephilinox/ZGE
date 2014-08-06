@@ -2,9 +2,10 @@
 
 using namespace zge;
 
-BaseSystem::BaseSystem(std::string id, std::shared_ptr<BaseState> stateOwner)
+BaseSystem::BaseSystem(std::string id, std::reference_wrapper<sf::RenderWindow> window, std::reference_wrapper<EntityManager> entMan)
     : ID(id)
-    , m_stateOwner(stateOwner)
+    , m_window(window)
+    , m_entMan(entMan)
 {
 }
 
