@@ -33,7 +33,7 @@ private:
 template <class T>
 void SystemManager::addSystem()
 {
-    std::shared_ptr<T> system(new T(m_window, m_entMan));
+    std::shared_ptr<T> system(new T(std::ref(m_window), std::ref(m_entMan)));
 
     if (!m_systems.count(system->ID))
     {

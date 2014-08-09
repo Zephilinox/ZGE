@@ -6,6 +6,7 @@ SystemManager::SystemManager(std::reference_wrapper<sf::RenderWindow> window, st
     : m_window(window)
     , m_entMan(entMan)
 {
+    m_entMan.get().entityExists(0);
 }
 
 void SystemManager::handleEvent(const sf::Event& event)
