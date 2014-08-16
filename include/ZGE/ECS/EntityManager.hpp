@@ -26,7 +26,7 @@ typedef std::unordered_map<EntityID, EntityComponents>                      Enti
 class EntityManager
 {
 public:
-    EntityManager();
+    EntityManager(std::shared_ptr<BaseState> stateOwner);
 
     EntityID createEntity();
     bool entityExists(EntityID entID);
@@ -45,6 +45,7 @@ public:
 private:
     template <class T> bool hasComponents(EntityID entID);
 
+    std::shared_ptr<BaseState> m_stateOwner;
     EntityMap m_entities;
 };
 

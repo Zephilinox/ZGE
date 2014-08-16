@@ -2,7 +2,8 @@
 
 using namespace zge;
 
-EntityManager::EntityManager()
+EntityManager::EntityManager(std::shared_ptr<BaseState> stateOwner)
+    : m_stateOwner(stateOwner)
 {
 }
 
