@@ -26,7 +26,7 @@ typedef std::unordered_map<EntityID, EntityComponents>                      Enti
 class EntityManager
 {
 public:
-    EntityManager();
+    EntityManager(std::shared_ptr<BaseState> stateOwner);
 
     EntityID createEntity();
     bool entityExists(EntityID entID);
@@ -45,6 +45,7 @@ public:
 private:
     template <class T> bool hasComponents(EntityID entID);
 
+    std::shared_ptr<BaseState> m_stateOwner;
     EntityMap m_entities;
 };
 
@@ -117,6 +118,7 @@ bool EntityManager::hasComponent(EntityID entID)
     }
     else
     {
+        std::cout << entID << "\n";
         assert(!"hasComponent: That Entity ID is invalid");
         return false;
     }
@@ -162,15 +164,34 @@ std::vector<std::reference_wrapper<T>> EntityManager::getAllComponents()
 {
     std::vector<std::reference_wrapper<T>> components;
 
-    for (auto& ent : m_entities)
+    std::cout << "2Size: " << m_entities.size() << "\n";
+
+    /*for (auto& ent : m_entities)
     {
+        std::cout << ent.first << "\n";
         if (hasComponent<T>(ent.first))
         {
-            auto comp = std::ref(std::static_pointer_cast<T>(m_entities[ent.first][T().ID]));
+            auto comp1 = std::static_pointer_cast<T>(m_entities[ent.first][T().ID]);
+            std::reference_wrapper<T> comp2 = std::ref(*comp1.get());
 
-            components.push_back(comp);
+            components.push_back(comp2);
         }
-    }
+    }*/
+
+    /*for (auto it = m_entities.begin(); it != m_entities.end(); ++it)
+    {
+        EntityID entID = it->first;
+
+        std::cout << entID << "\n";
+
+        /*if (hasComponent<T>(entID))
+        {
+            auto comp1 = std::static_pointer_cast<T>(m_entities[entID][T().ID]);
+            std::reference_wrapper<T> comp2 = std::ref(*comp1.get());
+
+            components.push_back(comp2);
+        }*/
+    //}
 
     return components;
 }

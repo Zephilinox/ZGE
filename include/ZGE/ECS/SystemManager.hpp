@@ -1,5 +1,5 @@
-#ifndef SystemManager_HPP
-#define SystemManager_HPP
+#ifndef SYSTEMMANAGER_HPP
+#define SYSTEMMANAGER_HPP
 
 //STD
 #include <memory>
@@ -47,4 +47,4 @@ void SystemManager::addSystem()
 
 } //ZGE
 
-#endif //SystemManager_HPP
+#endif //SYSTEMMANAGER_HPP
