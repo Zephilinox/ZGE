@@ -7,7 +7,6 @@
 #include <cassert>
 #include <iostream>
 #include <vector>
-#include <functional>
 
 //3RD
 #include <SFML/Graphics.hpp>
@@ -39,7 +38,7 @@ public:
     template <class T> bool hasComponent(EntityID entID);
     template <class T1, class T2, class... Other> bool hasComponents(EntityID entID);
     template <class T> T& getComponent(EntityID entID);
-    template <class T> std::vector<std::reference_wrapper<T>> getAllComponents();
+    template <class T> std::vector<std::shared_ptr<T>> getAllComponents();
     template <class T> void removeComponent(EntityID entID);
 
 private:
@@ -118,7 +117,6 @@ bool EntityManager::hasComponent(EntityID entID)
     }
     else
     {
-        std::cout << entID << "\n";
         assert(!"hasComponent: That Entity ID is invalid");
         return false;
     }
@@ -160,38 +158,19 @@ T& EntityManager::getComponent(EntityID entID)
 }
 
 template <class T>
-std::vector<std::reference_wrapper<T>> EntityManager::getAllComponents()
+std::vector<std::shared_ptr<T>> EntityManager::getAllComponents()
 {
-    std::vector<std::reference_wrapper<T>> components;
+    std::vector<std::shared_ptr<T>> components;
 
-    std::cout << "2Size: " << m_entities.size() << "\n";
-
-    /*for (auto& ent : m_entities)
+    for (auto& ent : m_entities)
     {
-        std::cout << ent.first << "\n";
         if (hasComponent<T>(ent.first))
         {
-            auto comp1 = std::static_pointer_cast<T>(m_entities[ent.first][T().ID]);
-            std::reference_wrapper<T> comp2 = std::ref(*comp1.get());
+            auto comp = std::static_pointer_cast<T>(m_entities[ent.first][T().ID]);
 
-            components.push_back(comp2);
+            components.push_back(comp);
         }
-    }*/
-
-    /*for (auto it = m_entities.begin(); it != m_entities.end(); ++it)
-    {
-        EntityID entID = it->first;
-
-        std::cout << entID << "\n";
-
-        /*if (hasComponent<T>(entID))
-        {
-            auto comp1 = std::static_pointer_cast<T>(m_entities[entID][T().ID]);
-            std::reference_wrapper<T> comp2 = std::ref(*comp1.get());
-
-            components.push_back(comp2);
-        }*/
-    //}
+    }
 
     return components;
 }

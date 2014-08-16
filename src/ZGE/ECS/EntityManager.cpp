@@ -18,13 +18,11 @@ EntityID EntityManager::createEntity()
 
     m_entities[entID];
 
-    std::cout << "Creating entity: " << entID << "\n";
     return entID;
 }
 
 bool EntityManager::entityExists(unsigned entID)
 {
-    std::cout << "Size: " << m_entities.size() << "\n";
     return m_entities.count(entID);
 }
 
