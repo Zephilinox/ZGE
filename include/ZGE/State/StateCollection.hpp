@@ -2,7 +2,7 @@
 #define STATECOLLECTION_HPP
 
 //STD
-#include <stack>
+#include <vector>
 #include <memory>
 
 //3RD
@@ -24,19 +24,19 @@ public:
 
     void pop();
 
-    BaseState& getTop();
+    BaseState& getFromTop(unsigned offset);
 
     unsigned getSize();
 
 private:
-    std::stack<std::shared_ptr<BaseState>> m_states;
+    std::vector<std::shared_ptr<BaseState>> m_states;
 };
 
 //Template functions
 template <class T>
 void StateCollection::push(sf::RenderWindow& window)
 {
-    m_states.push(std::make_shared<T>(T(window, *this)));
+    m_states.push_back(std::make_shared<T>(T(window, *this)));
 }
 
 } //ZGE

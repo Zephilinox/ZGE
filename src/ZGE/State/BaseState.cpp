@@ -9,7 +9,8 @@ namespace zge
 BaseState::BaseState(sf::RenderWindow& window, StateCollection& stateCollection):
 m_window(window),
 m_stateCollection(stateCollection),
-m_stateID("BaseState")
+m_stateID("BaseState"),
+transparent(false)
 {
     //std::cout << "[BaseState] Constructor\n";
 }

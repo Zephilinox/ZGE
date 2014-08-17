@@ -27,6 +27,7 @@ public:
     virtual void postDraw();
 
     std::string getStateID();
+    bool transparent;
 
 protected:
     sf::RenderWindow& m_window;

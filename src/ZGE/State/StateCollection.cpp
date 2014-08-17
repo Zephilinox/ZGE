@@ -13,13 +13,13 @@ StateCollection::StateCollection()
 
 void StateCollection::pop()
 {
-    m_states.pop();
+    m_states.pop_back();
 }
 
-BaseState& StateCollection::getTop()
+BaseState& StateCollection::getFromTop(unsigned offset)
 {
     assert(m_states.size());
-    return *m_states.top();
+    return *m_states[m_states.size() - 1 - offset];
 }
 
 unsigned StateCollection::getSize()
