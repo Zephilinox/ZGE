@@ -7,10 +7,10 @@ namespace zge
 {
 
 BaseState::BaseState(sf::RenderWindow& window, StateCollection& stateCollection):
+transparent(false),
 m_window(window),
 m_stateCollection(stateCollection),
-m_stateID("BaseState"),
-transparent(false)
+m_stateID("BaseState")
 {
     //std::cout << "[BaseState] Constructor\n";
 }

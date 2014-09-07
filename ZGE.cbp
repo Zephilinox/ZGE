@@ -16,6 +16,7 @@
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add library="sfml-audio-d-s" />
@@ -35,6 +36,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-Wall" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -50,6 +52,8 @@
 			<Add option="-std=c++11" />
 			<Add option="-DSFML_STATIC" />
 			<Add directory="Z:/Programming/C++/SFML-2.1/include" />
+			<Add directory="Z:/Programming/C++/Lua-5.2.3/include" />
+			<Add directory="Z:/Programming/C++/LuaBridge/Source" />
 			<Add directory="src" />
 			<Add directory="include" />
 		</Compiler>
@@ -57,6 +61,7 @@
 			<Add option="-static" />
 			<Add option="-static-libstdc++" />
 			<Add option="-satic-libgcc" />
+			<Add library="Z:\Programming\C++\MinGW-Latest\lib\liblua.a" />
 			<Add directory="Z:/Programming/C++/SFML-2.1/lib" />
 		</Linker>
 		<Unit filename="include/ZGE/Collider.hpp" />
@@ -67,6 +72,7 @@
 		<Unit filename="include/ZGE/GUI/Button.hpp" />
 		<Unit filename="include/ZGE/GUI/Menu.hpp" />
 		<Unit filename="include/ZGE/KeybindingCache.hpp" />
+		<Unit filename="include/ZGE/Lua.hpp" />
 		<Unit filename="include/ZGE/ResourceManagement/Resource.hpp" />
 		<Unit filename="include/ZGE/ResourceManagement/ResourceCache.hpp" />
 		<Unit filename="include/ZGE/ResourceManagement/ResourceManager.hpp" />
@@ -84,6 +90,7 @@
 		<Unit filename="src/ZGE/GUI/Button.cpp" />
 		<Unit filename="src/ZGE/GUI/Menu.cpp" />
 		<Unit filename="src/ZGE/KeybindingCache.cpp" />
+		<Unit filename="src/ZGE/Lua.cpp" />
 		<Unit filename="src/ZGE/ResourceManagement/Resource.cpp" />
 		<Unit filename="src/ZGE/State/BaseState.cpp" />
 		<Unit filename="src/ZGE/State/StateCollection.cpp" />
