@@ -11,6 +11,13 @@ using namespace zge;
 Lua::Lua()
 {
     m_luaState = luaL_newstate();
+    if (!m_luaState) throw std::runtime_error("The Lua state could not be constructed.\n");
+}
+
+Lua::~Lua()
+{
+    lua_close(m_luaState);
+    m_luaState = nullptr;
 }
 
 int Lua::loadFile(std::string file)
@@ -19,26 +26,7 @@ int Lua::loadFile(std::string file)
 
     if (error)
     {
-        switch (error)
-        {
-            case LUA_ERRSYNTAX:
-            {
-                std::cout << "Syntax Error: " + std::string(lua_tostring(m_luaState, -1)) << "\n";
-                break;
-            }
-
-            case LUA_ERRFILE:
-            {
-                std::cout << "Could not find file '" << file << "'\n";
-                break;
-            }
-
-            default:
-            {
-                std::cout << "ErrorCode = " + zge::toString(error) << "\n";
-                break;
-            }
-        }
+        throw std::runtime_error(luaErrorAsString(m_luaState, error));
     }
 
     return error;
@@ -50,31 +38,7 @@ int Lua::executeFile(std::string file)
 
     if (error)
     {
-        switch (error)
-        {
-            case LUA_ERRRUN:
-            {
-                std::cout << "Runtime Error: " + std::string(lua_tostring(m_luaState, -1)) << "\n";
-                break;
-            }
-
-            case LUA_ERRMEM:
-            {
-                std::cout << "Memory Allocation Error\n";
-                break;
-            }
-
-            case LUA_ERRERR:
-            {
-                std::cout << "Error while running error handler\n";
-                break;
-            }
-
-            default:
-            {
-                std::cout << "ErrorCode" + zge::toString(error) << "\n";
-            }
-        }
+        throw std::runtime_error(luaErrorAsString(m_luaState, error));
     }
 
     return error;

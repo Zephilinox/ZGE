@@ -23,6 +23,8 @@ namespace zge
 
         void setText(std::string str);
         void setColor(sf::Color col);
+        void enableBorder(bool enable);
+        void setBorderColor(sf::Color col);
 
         sf::Color getColor();
 
@@ -33,6 +35,9 @@ namespace zge
         sf::Text m_text;
         sf::Vector2f m_position;
         Origin m_origin;
+
+        bool m_borderEnabled;
+        sf::Color m_borderColor;
     };
 } //ZGE
 

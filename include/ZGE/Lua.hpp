@@ -18,6 +18,7 @@ class Lua
 {
 public:
     Lua();
+    ~Lua();
 
     template <typename T>
     T getGlobal(std::string varName);
@@ -40,7 +41,7 @@ T Lua::getGlobal(std::string varName)
 
         if (varRef.isNil())
         {
-            throw std::runtime_error(varName + " is Nil");
+            throw std::runtime_error("'" + varName + "' is Nil");
         }
 
         return varRef.cast<T>();
@@ -56,13 +57,14 @@ T Lua::getGlobal(std::string varName)
             vars.push_back(splitVarName);
         }
 
-        if (vars.size() >= 1)
+        if (vars.size() > 1)
         {
+            //We need to check the first value isn't nil as that is the root table which we later index from.
             luabridge::LuaRef varRef = luabridge::getGlobal(m_luaState, vars[0].c_str());
 
             if (varRef.isNil())
             {
-                throw std::runtime_error(vars[0] + " is Nil");
+                throw std::runtime_error("'" + vars[0] + "' is Nil, in request for '" + varName + "'");
             }
 
             for (unsigned i = 1; i < vars.size(); ++i)
@@ -71,7 +73,7 @@ T Lua::getGlobal(std::string varName)
 
                 if (varRef.isNil())
                 {
-                    throw std::runtime_error(vars[i] + " is Nil");
+                    throw std::runtime_error("'" + vars[i] + "' is Nil, in request for '" + varName + "'");
                 }
             }
 
@@ -79,7 +81,7 @@ T Lua::getGlobal(std::string varName)
         }
         else
         {
-            throw std::runtime_error(varName + " is invalid");
+            throw std::runtime_error("'" + varName + "' is invalid");
         }
     }
 }

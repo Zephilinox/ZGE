@@ -5,7 +5,9 @@ using namespace zge;
 TextHandler::TextHandler(std::string textString, std::string fontLocation, unsigned characterSize, sf::Vector2f position, Origin origin):
 m_font(fontLocation),
 m_position(position),
-m_origin(origin)
+m_origin(origin),
+m_borderEnabled(false),
+m_borderColor(sf::Color::Black)
 {
     m_text.setFont(m_font);
     m_text.setString(textString);
@@ -26,7 +28,32 @@ void TextHandler::update(float dt)
 
 void TextHandler::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    target.draw(m_text, states);
+    if (m_borderEnabled)
+    {
+        sf::Vector2f pos = m_text.getPosition();
+        sf::Text text = m_text;
+
+        //We need to use the alpha of the original text so that the border can fade along with it.
+        text.setColor(sf::Color(m_borderColor.r, m_borderColor.g, m_borderColor.b, m_text.getColor().a));
+
+        text.setPosition(pos.x - 1, pos.y);
+        target.draw(text, states);
+
+        text.setPosition(pos.x + 1, pos.y);
+        target.draw(text, states);
+
+        text.setPosition(pos.x, pos.y - 1);
+        target.draw(text, states);
+
+        text.setPosition(pos.x, pos.y + 1);
+        target.draw(text, states);
+
+        target.draw(m_text, states);
+    }
+    else
+    {
+        target.draw(m_text, states);
+    }
 }
 
 void TextHandler::setText(std::string str)
@@ -37,6 +64,16 @@ void TextHandler::setText(std::string str)
 void TextHandler::setColor(sf::Color col)
 {
     m_text.setColor(col);
+}
+
+void TextHandler::enableBorder(bool enable)
+{
+    m_borderEnabled = enable;
+}
+
+void TextHandler::setBorderColor(sf::Color col)
+{
+    m_borderColor = col;
 }
 
 sf::Color TextHandler::getColor()

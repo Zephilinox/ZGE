@@ -5,6 +5,8 @@
 
 using namespace zge;
 
+//TODO: update this class to use the text handler
+
 Button::Button(sf::RenderWindow& window, std::string textureName):
 m_window(window),
 m_mouseClicked(false),
