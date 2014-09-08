@@ -120,6 +120,13 @@ void TextHandler::updatePosition()
             break;
         }
 
+        case Origin::BottomCentre:
+        {
+            m_text.setPosition(m_position.x - ((m_text.getLocalBounds().width + m_text.getLocalBounds().left)/2),
+                               m_position.y - (m_text.getLocalBounds().height + m_text.getLocalBounds().top));
+            break;
+        }
+
         case Origin::MiddleCentre:
         default:
         {

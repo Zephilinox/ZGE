@@ -231,10 +231,10 @@ Vector Vector::rotatedWithRad(double argRad)
 
 double Vector::degrees()
 {
-    return std::atan2(-x, y) * (180.f / pi);
+    return std::atan2(x, -y) * (180.f / pi);
 }
 
 double Vector::radians()
 {
-    return std::atan2(-x, y);
+    return std::atan2(x, -y);
 }
