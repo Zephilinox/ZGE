@@ -85,45 +85,47 @@ void TextHandler::updatePosition()
 {
     switch(m_origin)
     {
+        // +/- 1 is for a bit of padding around the corners of the screen
+
         case Origin::TopLeft:
         {
-            m_text.setPosition(m_position.x,
-                               m_position.y);
+            m_text.setPosition(m_position.x - m_text.getLocalBounds().left + 1,
+                               m_position.y - m_text.getLocalBounds().top + 1);
             break;
         }
 
         case Origin::TopRight:
         {
-            m_text.setPosition(m_position.x - (m_text.getLocalBounds().width + m_text.getLocalBounds().left),
-                               m_position.y);
+            m_text.setPosition(m_position.x - (m_text.getLocalBounds().width + m_text.getLocalBounds().left) - 1,
+                               m_position.y - m_text.getLocalBounds().top + 1);
             break;
         }
 
         case Origin::TopCentre:
         {
             m_text.setPosition(m_position.x - ((m_text.getLocalBounds().width + m_text.getLocalBounds().left)/2),
-                               m_position.y);
+                               m_position.y - m_text.getLocalBounds().top + 1);
             break;
         }
 
         case Origin::BottomLeft:
         {
-            m_text.setPosition(m_position.x,
-                               m_position.y - (m_text.getLocalBounds().height + m_text.getLocalBounds().top));
+            m_text.setPosition(m_position.x - m_text.getLocalBounds().left + 1,
+                               m_position.y - (m_text.getLocalBounds().height + m_text.getLocalBounds().top) - 1);
             break;
         }
 
         case Origin::BottomRight:
         {
-            m_text.setPosition(m_position.x - (m_text.getLocalBounds().width + m_text.getLocalBounds().left),
-                               m_position.y - (m_text.getLocalBounds().height + m_text.getLocalBounds().top));
+            m_text.setPosition(m_position.x - (m_text.getLocalBounds().width + m_text.getLocalBounds().left) - 1,
+                               m_position.y - (m_text.getLocalBounds().height + m_text.getLocalBounds().top) - 1);
             break;
         }
 
         case Origin::BottomCentre:
         {
             m_text.setPosition(m_position.x - ((m_text.getLocalBounds().width + m_text.getLocalBounds().left)/2),
-                               m_position.y - (m_text.getLocalBounds().height + m_text.getLocalBounds().top));
+                               m_position.y - (m_text.getLocalBounds().height + m_text.getLocalBounds().top) - 1);
             break;
         }
 
