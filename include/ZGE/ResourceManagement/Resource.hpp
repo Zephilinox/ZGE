@@ -119,6 +119,8 @@ public:
 
     Resource(const Resource<sf::Sound>& res);
     Resource<sf::Sound>& operator=(const Resource<sf::Sound>& res);
+    operator sf::Sound&() const;
+    sf::Sound* operator->();
 
     sf::Sound& get();
 
@@ -143,6 +145,8 @@ class Resource<sf::Music>
 public:
     Resource(const Resource<sf::Music>& res) = delete;
     Resource<sf::Music>& operator=(const Resource<sf::Music>& res) = delete;
+    operator sf::Music&() const;
+    sf::Music* operator->();
 
     Resource(std::string n);
     ~Resource();

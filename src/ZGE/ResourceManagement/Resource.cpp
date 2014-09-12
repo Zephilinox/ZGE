@@ -49,6 +49,16 @@ Resource<sf::Sound>& Resource<sf::Sound>::operator=(const Resource<sf::Sound>& r
     return *this;
 }
 
+Resource<sf::Sound>::operator sf::Sound&() const
+{
+    return ResourceManager<sf::Sound>::getInstance().get(m_name);
+}
+
+sf::Sound* Resource<sf::Sound>::operator->()
+{
+    return &get();
+}
+
 sf::Sound& Resource<sf::Sound>::get()
 {
     return m_sound;
@@ -100,6 +110,16 @@ Resource<sf::Music>::~Resource()
     //std::cout << "[Resource] Destructor | " << m_name << "\n";
     //std::cout << "\t[Resource] Global Music Instances = " << m_globalMusicInstances << "\n";
     m_globalMusicInstances--;
+}
+
+Resource<sf::Music>::operator sf::Music&() const
+{
+    return ResourceManager<sf::Music>::getInstance().get(m_name);
+}
+
+sf::Music* Resource<sf::Music>::operator->()
+{
+    return &get();
 }
 
 sf::Music& Resource<sf::Music>::get()
