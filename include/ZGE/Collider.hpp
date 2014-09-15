@@ -23,7 +23,7 @@ public:
 
     void updateCollisionShape(sf::Vector2f pos, float radius, float rotation);
 
-    sf::CircleShape getCollisionShape() const;
+    virtual sf::CircleShape getCollisionShape() const;
 
 protected:
     sf::CircleShape m_collisionShape;
