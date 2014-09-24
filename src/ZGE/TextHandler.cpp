@@ -1,5 +1,8 @@
 #include "ZGE/TextHandler.hpp"
 
+//STD
+#include <exception>
+
 using namespace zge;
 
 TextHandler::TextHandler(std::string textString, std::string fontLocation, unsigned characterSize, sf::Vector2f position, Origin origin):
@@ -141,11 +144,15 @@ void TextHandler::updatePosition()
         }
 
         case Origin::MiddleCentre:
-        default:
         {
             m_text.setPosition(m_position.x - ((m_text.getLocalBounds().width + m_text.getLocalBounds().left)/2),
                                m_position.y - ((m_text.getLocalBounds().height + m_text.getLocalBounds().top))/2);
             break;
+        }
+
+        default:
+        {
+            throw std::runtime_error("That origin type is invalid");
         }
     }
 }
