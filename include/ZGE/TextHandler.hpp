@@ -25,6 +25,8 @@ namespace zge
         void setColor(sf::Color col);
         void enableBorder(bool enable);
         void setBorderColor(sf::Color col);
+        void setPosition(sf::Vector2f pos);
+        void setOrigin(zge::Origin ori);
 
         sf::Color getColor();
 

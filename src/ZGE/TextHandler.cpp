@@ -76,6 +76,17 @@ void TextHandler::setBorderColor(sf::Color col)
     m_borderColor = col;
 }
 
+void TextHandler::setPosition(sf::Vector2f pos)
+{
+    m_position = pos;
+    updatePosition();
+}
+
+void TextHandler::setOrigin(zge::Origin ori)
+{
+    m_origin = ori;
+}
+
 sf::Color TextHandler::getColor()
 {
     return m_text.getColor();
