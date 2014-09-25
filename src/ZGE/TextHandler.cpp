@@ -88,6 +88,7 @@ void TextHandler::setPosition(sf::Vector2f pos)
 void TextHandler::setOrigin(zge::Origin ori)
 {
     m_origin = ori;
+    updatePosition();
 }
 
 sf::Color TextHandler::getColor()
